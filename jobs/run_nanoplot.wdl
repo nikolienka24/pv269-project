@@ -34,16 +34,20 @@ task RunNanoPlot {
 # ================================================================
 # WORKFLOW DEFINITION
 
-workflow IdentifyExtractrDNA {
+workflow RunNanoplot {
     input {
         Array[File] fastqs
         String out_dir = "assemblies.rdna"
+        Int threads = 16
+        String memory = "32 GB"
     }
 
     call RunNanoPlot {
         input:
             input_fastqs = fastqs,
-            output_dir_name = out_dir
+            output_dir_name = out_dir,
+            threads = threads,
+            memory = memory
     }
 
     output {

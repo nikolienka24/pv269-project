@@ -7,8 +7,8 @@ task RunQuast {
         # Array allows you to pass multiple assemblies to compare
         Array[File] assemblies
         String output_dir_name = "quast_output"
-        Int threads = 16
-        String memory = "32 GB"
+        Int threads
+        String memory
     }
 
     command <<<
@@ -38,12 +38,16 @@ workflow QuastAnalysis {
     input {
         Array[File] input_assemblies
         String out_dir = "assemblies.comparison"
+        Int threads = 16
+        String memory = "32 GB"
     }
 
     call RunQuast {
         input:
             assemblies = input_assemblies,
-            output_dir_name = out_dir
+            output_dir_name = out_dir,
+            threads = threads,
+            memory = memory
     }
 
     output {

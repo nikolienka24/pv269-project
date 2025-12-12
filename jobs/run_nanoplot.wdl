@@ -37,7 +37,7 @@ task RunNanoPlot {
 workflow IdentifyExtractrDNA {
     input {
         Array[File] fastqs
-        String out_dir = "pan027.rdna"
+        String out_dir = "assemblies.rdna"
     }
 
     call RunNanoPlot {

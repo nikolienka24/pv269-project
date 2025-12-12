@@ -3,8 +3,8 @@
   "IdentifyExtractrDNA.alignment_score_threshold": 3000,
   "IdentifyExtractrDNA.dataset": "/auto/brno2/home/nikolpolakovaa/pv269-project/data/example-reads/PAU43661_c445e52d_798ea700_0.fastq",
   "IdentifyExtractrDNA.num_threads": 8,
-  "IdentifyExtractrDNA.IdentifyRdnaReads.result_ids_file": "rdna_ids.txt)",
-  "IdentifyExtractrDNA.ExtractReads.result_extracted_rdna_reads": "rdna_reads.fastq)",
+  "IdentifyExtractrDNA.IdentifyRdnaReads.result_ids_file": "rdna_ids.txt",
+  "IdentifyExtractrDNA.ExtractReads.result_extracted_rdna_reads": "rdna_reads.fastq",
   "IdentifyExtractrDNA.rdna_reference": "/auto/brno2/home/nikolpolakovaa/pv269-project/data/references/rDNA.array.fa"
 }
 

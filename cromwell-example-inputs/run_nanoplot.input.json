@@ -1,0 +1,7 @@
+{
+  "RunNanoplot.fastqs": [
+    "/auto/brno2/home/nikolpolakovaa/pv269-project/data/example-reads/PAU43661_c445e52d_798ea700_0.fastq",
+    "/auto/brno2/home/nikolpolakovaa/pv269-project/data/example-reads/PAU43661_c445e52d_798ea700_1.fastq"
+  ],
+  "RunNanoplot.out_dir": "pan027.rdna.test_subset"
+}

@@ -1,0 +1,6 @@
+{
+  "QuastAnalysis.input_assemblies": [
+    "/auto/brno2/home/nikolpolakovaa/pv269-project/data/assemblies/pan027.rdna.fasta.gz"
+  ],
+  "QuastAnalysis.out_dir": "pan027_rdna_assembly"
+}

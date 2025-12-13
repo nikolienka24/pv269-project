@@ -6,24 +6,20 @@ task RunNanoPlot {
     input {
         Array[File] input_fastqs
         String output_dir_name = "nanoplot_output"
-        Int threads = 16
-        String memory = "32 GB"
+        Int threads = 4
+        String memory = "8 GB"
     }
 
     command <<<
         set -euo pipefail
 
-        # Run NanoPlot
         NanoPlot \
             --fastq ~{sep=' ' input_fastqs} \
             -o ~{output_dir_name} \
             -t ~{threads}
     >>>
 
-    output {
-        # Capture everything else in the folder (images, stats)
-        Array[File] all_outputs = glob("~{output_dir_name}/*")
-    }
+    output { }
 
     runtime {
         cpu: threads
@@ -37,9 +33,9 @@ task RunNanoPlot {
 workflow RunNanoplot {
     input {
         Array[File] fastqs
-        String out_dir = "assemblies.rdna"
-        Int threads = 16
-        String memory = "32 GB"
+        String out_dir = "output_nanoplot"
+        Int threads = 4
+        String memory = "8 GB"
     }
 
     call RunNanoPlot {
@@ -50,7 +46,5 @@ workflow RunNanoplot {
             memory = memory
     }
 
-    output {
-        Array[File] full_results = RunNanoPlot.all_outputs
-    }
+    output { }
 }

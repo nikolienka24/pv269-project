@@ -15,14 +15,6 @@ task FilterByLength {
     command <<<
         set -euo pipefail
 
-        # uncomment when working on MetaCentrum (MetaCentrum Configuration)
-        # export OPENBLAS_NUM_THREADS=1
-        # export OMP_NUM_THREADS=1
-        # export MKL_NUM_THREADS=1
-        # export MPLBACKEND=Agg
-        # export MPLCONFIGDIR=.
-        # export XDG_CACHE_HOME=.
-
         OUTPUT_FILE="filtered_min~{min_length}.fasta"
 
         echo "Filtering sequences >= ~{min_length} bp..."

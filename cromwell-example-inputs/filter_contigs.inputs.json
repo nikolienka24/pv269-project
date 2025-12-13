@@ -1,5 +1,5 @@
 {
-  "FilterAssembly.assembly": "data/assemblies/pan027.wga.fasta",
+  "FilterAssembly.assembly": "pv269_project.rdna_asssembly_comparison/assemblies/pan027.wga.fasta",
   "FilterAssembly.min_len_threshold": 12500,
   "FilterAssembly.bad_contigs": [
     

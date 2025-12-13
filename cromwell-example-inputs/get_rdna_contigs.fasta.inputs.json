@@ -1,6 +1,6 @@
 {
-  "ExtractRDNA.input_assembly": "/storage/brno2/home/nikolpolakovaa/pv269-project/data/assemblies/pan027.wga.fasta",
-  "ExtractRDNA.input_reference": "/storage/brno2/home/nikolpolakovaa/pv269-project/data/references/rDNA_unit_KY962518-ROT.fa",
+  "ExtractRDNA.input_assembly": "pv269_project.rdna_asssembly_comparison/assemblies/pan027.wga.fasta",
+  "ExtractRDNA.input_reference": "pv269_project.rdna_asssembly_comparison/references/rDNA_unit_KY962518-ROT.fa",
   "ExtractRDNA.min_len": 40000,
   "ExtractRDNA.min_pid": 85.0,
   "ExtractRDNA.threads": 8,

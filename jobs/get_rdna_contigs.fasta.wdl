@@ -13,11 +13,6 @@ task RunAlignment {
     command <<<
         set -euo pipefail
 
-        # uncomment when working on MetaCentrum
-        # export OPENBLAS_NUM_THREADS=1
-        # export OMP_NUM_THREADS=1
-        # export MKL_NUM_THREADS=1
-
         echo "Starting minimap2 alignment..."
         minimap2 \
             -t ~{threads} \

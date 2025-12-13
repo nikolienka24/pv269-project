@@ -13,16 +13,6 @@ task RunModDotPlot {
     command <<<
         set -euo pipefail
 
-        # 1. FIX: Prevent OpenBLAS Threading Crash - uncomment when working on MetaCentrum
-        # export OPENBLAS_NUM_THREADS=1
-        # export OMP_NUM_THREADS=1
-        # export MKL_NUM_THREADS=1
-
-        # 2. FIX: Prevent Graphics/Display Crash - uncomment when working on MetaCentrum
-        # export MPLBACKEND=Agg
-        # export MPLCONFIGDIR=.
-        # export XDG_CACHE_HOME=.
-
         moddotplot static \
             -f ~{input_fasta} \
             -o ~{output_prefix}

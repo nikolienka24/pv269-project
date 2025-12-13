@@ -1,0 +1,8 @@
+{
+  "ExtractRDNA.input_assembly": "/storage/brno2/home/nikolpolakovaa/pv269-project/data/assemblies/pan027.wga.fasta",
+  "ExtractRDNA.input_reference": "/storage/brno2/home/nikolpolakovaa/pv269-project/data/references/rDNA_unit_KY962518-ROT.fa",
+  "ExtractRDNA.min_len": 40000,
+  "ExtractRDNA.min_pid": 85.0,
+  "ExtractRDNA.threads": 8,
+  "ExtractRDNA.memory": "16 GB"
+}

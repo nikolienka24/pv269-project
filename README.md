@@ -34,7 +34,7 @@ The pipeline relies on the following tools.
 *(Note: Versions listed are those used during development. Newer versions may work but are not guaranteed.)*
 
 ### Environment Installation
-1. **Prerequisite:** Ensure [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Mamba](https://mamba.readthedocs.io/en/latest/) is installed.
+1. **Prerequisite:** Ensure [Miniconda](https://docs.conda.io/en/latest/miniconda.html) is installed.
 
 2. **Create the environment:**
    We provide a pre-configured environment file. Create `environment.yml` with the content below and run:

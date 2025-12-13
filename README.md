@@ -65,7 +65,7 @@ The generated assemblies, reference sequences, and subset test data are stored i
 
 **Storage Path:**
 ```text
-gs://fc-b9a7f568-e558-4a23-8d76-c2d67fbe7708/pv269_project.rdna_asssembly_comparison/
+PV269 workspace -> PV269_fall_2025/pv269_project.rdna_assembly_comparison/
 ```
 
 **Folder Structure:**

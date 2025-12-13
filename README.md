@@ -37,7 +37,7 @@ The pipeline relies on the following tools.
 1. **Prerequisite:** Ensure [Miniconda](https://docs.conda.io/en/latest/miniconda.html) is installed.
 
 2. **Create the environment:**
-   We provide a pre-configured environment file. Create `environment.yml` with the content below and run:
+   We provide a pre-configured environment file. Use `environment.yml` from this repository and run:
    ```bash
    conda env create -f environment.yml
 

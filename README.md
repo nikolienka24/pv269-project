@@ -11,7 +11,7 @@ The goal of this project is to **compare the contiguity and quality of rDNA asse
 
 To ensure a fair comparison, all variables (e.g. basecalling algorithms, coverage depth, and assembly parameters) are kept consistent across both methods. This study aims to determine the optimal strategy for resolving complex repetitive rDNA regions in the human genome.
 
-## 🛠️ Environment Set-up
+## Environment Set-up
 
 ### Software Dependencies
 The pipeline relies on the following tools.
@@ -36,13 +36,11 @@ The pipeline relies on the following tools.
 ### Environment Installation
 1. **Prerequisite:** Ensure [Miniconda](https://docs.conda.io/en/latest/miniconda.html) is installed.
 
-2. **Create the environment:**
-   We provide a pre-configured environment file. Use `environment.yml` from this repository and run:
+2. **Initialize the environment** using the provided configuration file. This will install all necessary dependencies into a new Conda environment named `pv269-project`.
    ```bash
    conda env create -f environment.yml
+   conda activate pv269-project
    ```
-
-   This will create `pv269-project` conda environment.
 
 ### Running WDL Scripts
 ![Java](https://img.shields.io/badge/Java->11-008080)

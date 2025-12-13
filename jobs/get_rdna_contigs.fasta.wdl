@@ -81,7 +81,7 @@ task ExtractSequences {
         set -euo pipefail
 
         # Copy input to current working directory so it can write the .fai index next to it
-        cp ~{assembly_fasta} current_assembly.fasta
+        ln -sf ~{assembly_fasta} current_assembly.fasta
 
         OUTPUT_FASTA="rdna_positive_contigs.fasta"
 

@@ -5,7 +5,7 @@ version 1.0
 task RunModDotPlot {
     input {
         File input_fasta
-        String output_prefix = "output_dotplot"
+        String output_folder_name
         Int threads = 1
         String memory = "8 GB"
     }
@@ -15,12 +15,10 @@ task RunModDotPlot {
 
         moddotplot static \
             -f ~{input_fasta} \
-            -o ~{output_prefix}
+            -o ~{output_folder_name}
     >>>
 
-    output {
-        Array[File] all_outputs = glob("~{output_prefix}*")
-    }
+    output {}
 
     runtime {
         cpu: threads
@@ -34,16 +32,14 @@ task RunModDotPlot {
 workflow ModDotPlotAnalysis {
     input {
         File fasta_file
-        String out_name = "output_dotplot"
+        String out_folder_name = "output_dotplot"
     }
 
     call RunModDotPlot {
         input:
             input_fasta = fasta_file,
-            output_prefix = out_name
+            output_folder_name = out_folder_name
     }
 
-    output {
-        Array[File] full_results = RunModDotPlot.all_outputs
-    }
+    output {}
 }

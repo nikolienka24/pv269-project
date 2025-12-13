@@ -2,6 +2,6 @@
   "ModDotPlotAnalysis.fasta_file": "pv269_project.rdna_asssembly_comparison/assemblies/pan027.rdna.fasta",
   "ModDotPlotAnalysis.RunModDotPlot.memory": "32 GB",
   "ModDotPlotAnalysis.RunModDotPlot.threads": 8,
-  "ModDotPlotAnalysis.out_name": "output_dotplot"
+  "ModDotPlotAnalysis.out_folder_name": "output_dotplot"
 }
 

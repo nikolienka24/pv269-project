@@ -14,9 +14,9 @@ task RunAlignment {
         set -euo pipefail
 
         # uncomment when working on MetaCentrum
-        export OPENBLAS_NUM_THREADS=1
-        export OMP_NUM_THREADS=1
-        export MKL_NUM_THREADS=1
+        # export OPENBLAS_NUM_THREADS=1
+        # export OMP_NUM_THREADS=1
+        # export MKL_NUM_THREADS=1
 
         echo "Starting minimap2 alignment..."
         minimap2 \
@@ -75,7 +75,7 @@ task FilterAlignments {
 }
 
 # ================================================================
-# TASK 3: Extraction 
+# TASK 3: Extraction
 task ExtractSequences {
     input {
         File assembly_fasta
@@ -124,16 +124,16 @@ workflow ExtractRDNA {
         Float min_pid = 85.0
 
         # Resources for the heavy alignment step
-        Int alignment_threads = 32
-        String alignment_memory = "128 GB"
+        Int threads = 32
+        String memory = "128 GB"
     }
 
     call RunAlignment {
         input:
             assembly_fasta = input_assembly,
             reference_fasta = input_reference,
-            threads = alignment_threads,
-            memory = alignment_memory
+            threads = threads,
+            memory = memory
     }
 
     call FilterAlignments {

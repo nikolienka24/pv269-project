@@ -6,7 +6,7 @@ version 1.0
 task FilterByLength {
     input {
         File input_fasta
-        Int min_length = 12500
+        Int min_length = 0
 
         Int threads = 2
         String memory = "4 GB"
@@ -15,18 +15,13 @@ task FilterByLength {
     command <<<
         set -euo pipefail
 
-        OUTPUT_FILE="filtered_min~{min_length}.fasta"
-
-        echo "Filtering sequences >= ~{min_length} bp..."
         seqkit seq \
             -m ~{min_length} \
-            ~{input_fasta} > "$OUTPUT_FILE"
-
-        echo "Done. Saved to $OUTPUT_FILE"
+            ~{input_fasta} > "filtered_min.~{min_length}.fasta"
     >>>
 
     output {
-        File filtered_fasta = glob("filtered_min*.fasta")[0]
+        File filtered_fasta = glob("filtered_min.*.fasta")[0]
     }
 
     runtime {
@@ -43,33 +38,33 @@ task RemoveContigsByName {
         Int threads = 2
         String memory = "4 GB"
     }
+    
+    File blacklist_file = write_lines(contig_names_to_remove) # write each contig name on separate line
 
     command <<<
         set -euo pipefail
 
-        # Symlink input because samtools needs to create .fai index next to it
-        ln -s ~{input_fasta} current.fasta
+        ln -sf ~{input_fasta} current.fasta
         
-        # Write the array of bad names to a file (blacklist)
-        printf "%s\n" ~{sep="\n" contig_names_to_remove} > blacklist.txt
-
-        OUTPUT_FILE="filtered_cleaned.fasta"
+        OUTPUT_FILE="filtered.fasta"
 
         # Generate the "whitelist"
         samtools faidx current.fasta
-        cut -f1 current.fasta.fai > all_names.txt
-        
-        # Filter: All Names MINUS blacklist = whitelist
-        grep -v -x -F -f blacklist.txt all_names.txt > whitelist.txt
+        cut -f1 current.fasta.fai > all_names.txt       
+        if [ -s ~{blacklist_file} ]; then
+            grep -v -x -F -f ~{blacklist_file} all_names.txt > whitelist.txt
+        else
+            cp all_names.txt whitelist.txt
+        fi
 
-        # --- 4. Extract ---
+        # Extract
         samtools faidx current.fasta \
             -r whitelist.txt \
             -o "$OUTPUT_FILE"
     >>>
 
     output {
-        File filtered_fasta = "filtered_cleaned.fasta"
+        File filtered_fasta = "filtered.fasta"
     }
 
     runtime {
@@ -85,7 +80,7 @@ workflow FilterAssembly {
     input {
         File assembly
         Int min_len_threshold = 0
-        Array[String] bad_contigs
+        Array[String] contigs_to_remove
         Int threads = 1
         String memory = "8 GB"
     }
@@ -99,7 +94,7 @@ workflow FilterAssembly {
     call RemoveContigsByName {
         input:
             input_fasta = FilterByLength.filtered_fasta,
-            contig_names_to_remove = bad_contigs
+            contig_names_to_remove = contigs_to_remove
     }
 
     output {

@@ -1,8 +1,10 @@
 {
-  "FilterAssembly.assembly": "pv269_project.rdna_asssembly_comparison/assemblies/pan027.wga.fasta",
+  "FilterAssembly.assembly": "pv269_project.rdna_asssembly_comparison/assemblies/pan027.rdna.fasta",
   "FilterAssembly.min_len_threshold": 12500,
-  "FilterAssembly.bad_contigs": [
-    
+  "FilterAssembly.contigs_to_remove": [
+    "ptg000001l",
+    "ptg000003l",
+    "ptg00000"
   ],
   "FilterAssembly.threads": 8,
   "FilterAssembly.memory": "24 GB"

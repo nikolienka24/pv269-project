@@ -18,7 +18,6 @@ The pipeline relies on the following tools.
 
 **Bioinformatics Tools:**
 <br>
-![Python](https://img.shields.io/badge/Python-3.10-008080)
 ![Hifiasm](https://img.shields.io/badge/Hifiasm-0.25.0-008080)
 ![Minimap2](https://img.shields.io/badge/Minimap2-2.30-008080)
 ![Samtools](https://img.shields.io/badge/Samtools-1.22.1-008080)
@@ -27,6 +26,7 @@ The pipeline relies on the following tools.
 
 **Python Packages:**
 <br>
+![Python](https://img.shields.io/badge/Python-3.10-008080)
 ![ModDotPlot](https://img.shields.io/badge/ModDotPlot-0.9.8-008080)
 ![Quast](https://img.shields.io/badge/Quast-5.2.0-008080)
 ![NanoPlot](https://img.shields.io/badge/NanoPlot-1.46.2-008080)

@@ -7,8 +7,9 @@ task IdentifyRdnaReads {
         File rdna_reference
         File dataset
         Int min_alignment_score = 3000
-        Int threads = 32
-        String minimap2_preset = "map-ont"
+        Int threads = 8
+        String memory = "16 GB"
+        String minimap2_preset = ""
         String result_ids_file = "rdna_ids.txt"
     }
 
@@ -47,7 +48,7 @@ task IdentifyRdnaReads {
 
     runtime {
         cpu: threads
-        memory: "64 GB"
+        memory: memory
     }
 }
 
@@ -59,15 +60,13 @@ task ExtractReads {
         File dataset
         File read_ids
         String result_extracted_rdna_reads = "rdna_reads.fastq"
-        Int threads
+        Int threads = 8
+        String memory = "16 GB"
     }
 
     command <<<
         set -euo pipefail
 
-        echo "Extracting matching reads..."
-
-        # Extract reads
         seqtk subseq "~{dataset}" "~{read_ids}" > "~{result_extracted_rdna_reads}"
     >>>
 
@@ -76,9 +75,8 @@ task ExtractReads {
     }
 
     runtime {
-        # Now this works because 'threads' is in the input block above
         cpu: threads
-        memory: "32 GB"
+        memory: memory
     }
 }
 
@@ -90,7 +88,8 @@ workflow IdentifyExtractrDNA {
         File rdna_reference
         File dataset
         Int alignment_score_threshold = 3000
-        Int num_threads = 32
+        Int num_threads = 8
+        String memory = "16 GB"
     }
 
     call IdentifyRdnaReads {
@@ -98,15 +97,16 @@ workflow IdentifyExtractrDNA {
             rdna_reference = rdna_reference,
             dataset = dataset,
             min_alignment_score = alignment_score_threshold,
-            threads = num_threads
+            threads = num_threads,
+            memory = memory
     }
 
     call ExtractReads {
         input:
             dataset = dataset,
             read_ids = IdentifyRdnaReads.rdna_read_ids,
-            # FIX 2: Passed the workflow variable 'num_threads' to the task input 'threads'
-            threads = num_threads
+            threads = num_threads,
+            memory = memory
     }
 
     output {

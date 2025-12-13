@@ -13,16 +13,15 @@ task RunAlignment {
     command <<<
         set -euo pipefail
 
-        echo "Starting minimap2 alignment..."
         minimap2 \
             -t ~{threads} \
             -c -x asm5 \
             ~{reference_fasta} \
-            ~{assembly_fasta} > "wga_vs_rdna.paf"
+            ~{assembly_fasta} > "alignment.paf"
     >>>
 
     output {
-        File raw_paf = "wga_vs_rdna.paf"
+        File raw_paf = "alignment.paf"
     }
 
     runtime {
@@ -33,12 +32,11 @@ task RunAlignment {
 
 # ================================================================
 # TASK 2: Filtering
-
 task FilterAlignments {
     input {
         File raw_paf
-        Int min_alignment_length
-        Float min_pident
+        Int min_alignment_length = 0
+        Float min_pident = 1
         Int threads = 1
         String memory = "4 GB"
     }
@@ -46,20 +44,20 @@ task FilterAlignments {
     command <<<
         set -euo pipefail
 
-        OUTPUT_FILTERED="wga_vs_rdna.filtered.paf"
+        OUTPUT_FILTERED="alignment.filtered.paf"
         OUTPUT_IDS="rdna_contig_ids.txt"
 
-        echo "Filtering PAF (Length >= ~{min_alignment_length}, Pct ID >= ~{min_pident}%)..."
+        # Filter PAF by min_alignment_length and min_pident"
         awk -v min_len=~{min_alignment_length} -v min_pid=~{min_pident} \
             '($11 >= min_len) && (($10/$11)*100 >= min_pid)' \
             ~{raw_paf} > "$OUTPUT_FILTERED"
 
-        echo "Extracting unique contig IDs..."
+        # Extract unique contig IDs
         awk '{print $1}' "$OUTPUT_FILTERED" | sort -u > "$OUTPUT_IDS"
     >>>
 
     output {
-        File filtered_paf = "wga_vs_rdna.filtered.paf"
+        File filtered_paf = "alignment.filtered.paf"
         File contig_ids = "rdna_contig_ids.txt"
     }
 
@@ -82,17 +80,15 @@ task ExtractSequences {
     command <<<
         set -euo pipefail
 
-        # --- Symlink Setup ---
-        # Samtools tries to write .fai index next to the input file.
-        # Inputs are read-only, so we symlink it to the current folder first.
-        ln -s ~{assembly_fasta} current_assembly.fasta
+        # Copy input to current working directory so it can write the .fai index next to it
+        cp ~{assembly_fasta} current_assembly.fasta
 
         OUTPUT_FASTA="rdna_positive_contigs.fasta"
 
-        echo "Indexing assembly..."
+        # Index assembly
         samtools faidx current_assembly.fasta
 
-        echo "Extracting sequences..."
+        # Extract sequences
         samtools faidx current_assembly.fasta \
             -r ~{contig_ids_file} \
             -o "$OUTPUT_FASTA"
@@ -118,9 +114,8 @@ workflow ExtractRDNA {
         Int min_len = 40000
         Float min_pid = 85.0
 
-        # Resources for the heavy alignment step
-        Int threads = 32
-        String memory = "128 GB"
+        Int threads = 16
+        String memory = "32 GB"
     }
 
     call RunAlignment {
@@ -135,7 +130,8 @@ workflow ExtractRDNA {
         input:
             raw_paf = RunAlignment.raw_paf,
             min_alignment_length = min_len,
-            min_pident = min_pid
+            min_pident = min_pid,
+            
     }
 
     call ExtractSequences {

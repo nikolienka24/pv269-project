@@ -50,6 +50,9 @@ This pipeline is written in **WDL** and requires an execution engine to run. The
 java -jar cromwell-x.jar run script.wdl -i inputs.json
 ```
 
+### Example Inputs
+To run these workflows, you will need to configure input JSON files. Example configurations for each workflow **are provided in the repository** in the `cromwell-example-inputs/` directory.
+
 ## Datasets
 
 ### 1. Raw Input Data
@@ -100,6 +103,3 @@ The workflow is implemented in **WDL** and consists of the following steps:
 6.  **Visualization:**
     * Generation of self-identity dot plots.
      * **Script:** `run_self-dotplot.wdl`
-
-## Example Inputs
-To run these workflows, you will need to configure input JSON files. Example configurations for each workflow **are provided in the repository** in the `cromwell-example-inputs/` directory.

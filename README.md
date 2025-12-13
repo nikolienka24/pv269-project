@@ -63,7 +63,6 @@ The analysis uses ONT / Super-accuracy basecalled reads from sample **PAN027** (
 ### 2. Project Data (Terra)
 The generated assemblies, reference sequences, and subset test data are stored in a **Google Cloud Storage** bucket on Terra.
 
-**Storage Path:**
 ```text
 PV269 workspace -> PV269_fall_2025/pv269_project.rdna_assembly_comparison/
 ```

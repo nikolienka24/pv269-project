@@ -4,7 +4,6 @@ version 1.0
 # TASK 1: Quast.py analysis
 task RunQuast {
     input {
-        # Array allows you to pass multiple assemblies to compare
         Array[File] assemblies
         String output_dir_name = "quast_output"
         Int threads
@@ -14,16 +13,13 @@ task RunQuast {
     command <<<
         set -euo pipefail
 
-        # Running QUAST
         quast.py \
             ~{sep=' ' assemblies} \
             -o ~{output_dir_name} \
             --threads ~{threads}
     >>>
 
-    output {
-        Array[File] all_outputs = glob("~{output_dir_name}/*")
-    }
+    output { }
 
     runtime {
         cpu: threads
@@ -37,9 +33,9 @@ task RunQuast {
 workflow QuastAnalysis {
     input {
         Array[File] input_assemblies
-        String out_dir = "assemblies.comparison"
-        Int threads = 16
-        String memory = "32 GB"
+        String out_dir = "quast_output"
+        Int threads = 4
+        String memory = "8 GB"
     }
 
     call RunQuast {
@@ -50,7 +46,5 @@ workflow QuastAnalysis {
             memory = memory
     }
 
-    output {
-        Array[File] full_results = RunQuast.all_outputs
-    }
+    output {}
 }

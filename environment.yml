@@ -1,0 +1,15 @@
+name: pv269-project
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - hifiasm
+  - minimap2
+  - samtools
+  - seqtk
+  - seqkit
+  - matplotlib
+  - cairo
+prefix: /Users/polakova/miniconda3/envs/pv269-project

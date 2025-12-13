@@ -10,14 +10,13 @@
 IN="<path_to_intput_fastq>"
 OUT_DIR="<path_to_output_directory>"
 
-hifiasm="<path_to_hifiasm_binary>"
-
 mkdir -p "$OUT_DIR"
 cd "$OUT_DIR" || exit 1
 
+# conda with installed hifiasm
 source /storage/praha5-elixir/projects/bioinf-fi/polakova/apps/miniconda3/etc/profile.d/conda.sh
 conda activate /storage/liberec3-tul/home/nikolpolakovaa/.conda/envs/bioinf
 
 echo "Started on $(date)"
-"$hifiasm" -o ont_assembly -t 64 "$IN"
+hifiasm -o ont_assembly -t 64 "$IN"
 echo "Finished on $(date)"

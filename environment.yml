@@ -12,4 +12,8 @@ dependencies:
   - seqkit
   - matplotlib
   - cairo
-prefix: /Users/polakova/miniconda3/envs/pv269-project
+  - pip
+  - pip:
+    - moddotplot
+    - nanoplot
+    - quast

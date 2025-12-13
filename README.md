@@ -40,6 +40,9 @@ The pipeline relies on the following tools.
    We provide a pre-configured environment file. Use `environment.yml` from this repository and run:
    ```bash
    conda env create -f environment.yml
+   ```
+
+   This will create `pv269-project` conda environment.
 
 ### Running WDL Scripts
 ![Java](https://img.shields.io/badge/Java->11-008080)
